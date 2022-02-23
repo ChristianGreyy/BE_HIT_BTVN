@@ -31,20 +31,20 @@ class User {
             return user._id === id;
         })
         if(!user) {
-            callback(null);
+            return callback(null);
         }
-        callback(user);
+
+        return callback(user);
     }
     static deleteById(id, callback) {
         let index = users.findIndex(user => {
             return user._id === id;
         })
-        if(!users) {
-            callback(null);
+        if(index === -1) {
+            return callback(null);
         }
         users.splice(index, 1);
-        console.log(users);
-        callback(users);
+        return callback(users);
     }
 }
 
@@ -57,7 +57,6 @@ app.get('/user', (req, res, next) => {
 
 app.post('/signup', (req, res, next) => {
     const { username, password } = req.body;
-    console.log(username, password);
     const user = new User(username, password);
     user.save();
     res.json({
@@ -70,16 +69,18 @@ app.put('/edit/:idUser', (req, res, next) => {
     const { idUser } = req.params;
     const { username, password } = req.body;
     User.findById(idUser, user => {
-        if(!user) {
-            res.status(404).json('User not found');
+        if(!user ) {
+            return res.json({
+                msg: 'User not found'
+            });
         }
         user.username = username;
         user.password = password;
-    })
 
-    res.json({
-        msg: 'Update user successfully'
-    });
+        return res.json({
+            msg: 'Update user successfully'
+        });
+    })
 })
 
 app.delete('/delete/:idUser', (req, res, next) => {
@@ -87,9 +88,9 @@ app.delete('/delete/:idUser', (req, res, next) => {
     const { username, password } = req.body;
     User.deleteById(idUser, user => {
         if(!user) {
-            res.status(404).json('User not found');
+            return res.json('User not found');
         }
-        res.json({
+        return res.json({
             msg: 'Delete user successfully'
         });
     })
