@@ -4,18 +4,20 @@ const User = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const path = require('path');
+const errorHandler = require('../utils/errorHandle');
 
 exports.login = asynchandle(async (req, res, next) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username: username });
+    console.log(user);
     if (!user) {
-        const error = new Error('Username not found', 404);
-        throw error;
+        return next(new errorHandler('Username not found', 404));
+        // const error = new Error('Username not found', 404);
+        // throw error;
     }
     const isHashed = await bcrypt.compare(password, user.password);
     if (!isHashed) {
-        const error = new Error('Invalid username or password');
-        throw error;
+        return next(errorHandler('Invalid username or password'))
     }
 
     const privateKey = fs.readFileSync(path.join(__dirname, '../domain.key'));

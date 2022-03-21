@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-
+const errorHandler = require('./middlewares/errorMiddleware');
+require('dotenv').config({ path: './config.env' })
 const app = express();
 
 app.use(express.json());
@@ -9,15 +10,7 @@ const router = require('./routes/index');
 
 router(app);
 
-app.use((error, req, res, next) => {
-    error.message = error.message || 'Server Error';
-    error.statusCode = error.status || 500;
-    res.json({
-        message: error.message,
-        status: error.status
-    })
-})
-
+app.use(errorHandler);
 
 mongoose.connect('mongodb://localhost/courses')
     .then(result => {
