@@ -1,0 +1,53 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,700");
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+.app__login {
+  box-shadow: 0 0 10px #888;
+  padding: 12px;
+}
+.app__login-title {
+  font-weight: bold;
+  font-size: 24px;
+}
+.app__login-form {
+}
+.app__login-form-group {
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+}
+.app__login-form-group__label {
+  width: 180px;
+}
+.app__login-form-group__input {
+  width: 100%;
+}
+
+.app__login-form__options {
+  display: flex;
+  justify-content: flex-end;
+}
+.app__login-form__options-forgot {
+  text-decoration: none;
+}
+.app__login-form__button {
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  height: 30px;
+  background-color: #3590cb;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4px;
+}

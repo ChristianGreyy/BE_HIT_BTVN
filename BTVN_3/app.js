@@ -1,10 +1,19 @@
 const express = require('express');
+const path = require('path');
 const mongoose = require('mongoose');
 const errorHandler = require('./middlewares/errorMiddleware');
 require('dotenv').config({ path: './config.env' })
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded())
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+// console.log(path.join(__dirname, 'public'))
+
+app.set('view engine', 'ejs');
+app.set('views', 'views');
 
 const router = require('./routes/index');
 

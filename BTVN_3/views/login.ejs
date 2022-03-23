@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+    <div class="app" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div class="app__login">
+            <div class="app__login-title">
+                Đăng nhập
+            </div>
+            <form action="/auth/login" method="POST" class="app__login-form">
+                <div class="app__login-form-group">
+                    <label for="username" class="app__login-form-group__label">
+                        Tên đăng nhập
+                    </label>
+                    <input type="text" name="username" class="app__login-form-group__input">
+                </div>
+                <div class="app__login-form-group">
+                    <label for="password" class="app__login-form-group__label">
+                        Mật khẩu
+                    </label>
+                    <input type="text" name="password" class="app__login-form-group__input">
+                </div>
+                <div class="app__login-form__options">
+                    <a href="/auth/reset-password" class="app__login-form__options-forgot">
+                        Quên mật khẩu
+                    </a>
+                </div>
+                <button class="app__login-form__button">
+                    Đăng nhập
+                </button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
